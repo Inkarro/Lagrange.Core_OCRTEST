@@ -1,12 +1,12 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Nodes;
 using Lagrange.Core;
 using Lagrange.Core.Message.Entity;
 using Lagrange.Core.Common.Interface.Api;
 using Lagrange.OneBot.Core.Entity.Action;
 using Lagrange.OneBot.Core.Operation.Converters;
+using Lagrange.OneBot.Message.Entity;
 using System;
-
 
 namespace Lagrange.OneBot.Core.Operation.Generic;
 
