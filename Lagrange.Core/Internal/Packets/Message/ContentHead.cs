@@ -15,7 +15,26 @@ internal class ContentHead
 
     [ProtoMember(4)] public long? Random { get; set; } 
 
-    [ProtoMember(5)] public uint? Sequence { get; set; }
+    [ProtoMember(5)]
+    private ulong? _sequenceForProto { get; set; } // 这个字段专门给 Protobuf-net 使用
+
+    /// <summary>
+    /// 消息序列号 (注意：如果服务器下发的值超过uint.MaxValue，这里会得到一个不正确的回绕值)
+    /// </summary>
+    public uint? Sequence
+    {
+        get
+        {
+            if (_sequenceForProto == null) return null;
+            
+            // 强制转换，这里就是可能导致数据错误的地方
+            return unchecked((uint)_sequenceForProto.Value); 
+        }
+        set
+        {
+            _sequenceForProto = value;
+        }
+    }
 
     [ProtoMember(6)] public long? Timestamp { get; set; }
 
